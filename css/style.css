@@ -230,6 +230,28 @@ p {
   font-size: 0.78rem;
 }
 
+.header-actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.theme-link {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  opacity: 0.65;
+}
+
+.menu-theme {
+  display: inline-block;
+  margin-top: 0.75rem;
+  opacity: 0.8;
+}
+
 .icon-btn {
   width: 2.6rem;
   height: 2.6rem;
@@ -960,6 +982,10 @@ p {
   }
 
   .brand-word {
+    display: none;
+  }
+
+  .theme-link {
     display: none;
   }
 }
