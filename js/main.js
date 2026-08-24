@@ -2,14 +2,10 @@ const header = document.querySelector("[data-header]");
 const menu = document.querySelector("[data-menu]");
 const openBtn = document.querySelector("[data-menu-open]");
 const closeBtn = document.querySelector("[data-menu-close]");
-const form = document.querySelector("#booking-form");
-const serviceField = document.querySelector("#service-field");
-const selectedLabel = document.querySelector("[data-selected-label]");
-const success = document.querySelector("[data-form-success]");
 const track = document.querySelector("[data-gallery-track]");
 
 const setHeader = () => {
-  header.classList.toggle("is-solid", window.scrollY > window.innerHeight * 0.72);
+  header.classList.toggle("is-solid", window.scrollY > 24);
 };
 
 const toggleMenu = (open) => {
@@ -34,62 +30,6 @@ document.querySelectorAll("[data-acc-btn]").forEach((btn) => {
   });
 });
 
-document.querySelectorAll("[data-tab]").forEach((tab) => {
-  tab.addEventListener("click", () => {
-    const id = tab.dataset.tab;
-    document.querySelectorAll("[data-tab]").forEach((btn) => {
-      btn.classList.toggle("is-active", btn === tab);
-      btn.setAttribute("aria-selected", String(btn === tab));
-    });
-    document.querySelectorAll("[data-panel]").forEach((panel) => {
-      const active = panel.dataset.panel === id;
-      panel.classList.toggle("is-active", active);
-      panel.hidden = !active;
-    });
-  });
-});
-
-document.querySelectorAll("[data-service]").forEach((item) => {
-  item.addEventListener("click", () => {
-    document.querySelectorAll("[data-service]").forEach((el) => el.classList.remove("is-selected"));
-    item.classList.add("is-selected");
-    const name = item.querySelector("strong").textContent.trim();
-    const price = item.querySelector("b").textContent.trim();
-    const detail = item.querySelector("em").textContent.trim();
-    const value = `${name} — ${price} (${detail})`;
-    serviceField.value = value;
-    selectedLabel.textContent = `${name} · ${price}`;
-    serviceField.setCustomValidity("");
-  });
-});
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (!serviceField.value) {
-    serviceField.setCustomValidity("Please choose a service.");
-    selectedLabel.textContent = "Choose a service from the menu.";
-    form.reportValidity();
-    return;
-  }
-
-  const data = new FormData(form);
-  const lines = [
-    `Service: ${data.get("service")}`,
-    `Name: ${data.get("name")}`,
-    `Email: ${data.get("email")}`,
-    `Phone: ${data.get("phone") || "—"}`,
-    `Preferred date: ${data.get("date") || "—"}`,
-    `Preferred time: ${data.get("time") || "—"}`,
-    `Notes: ${data.get("notes") || "—"}`,
-  ];
-  const mailto = `mailto:white.wolf.studio@icloud.com?subject=${encodeURIComponent(
-    "Booking request — White Wolf Studio"
-  )}&body=${encodeURIComponent(lines.join("\n"))}`;
-
-  success.hidden = false;
-  window.location.href = mailto;
-});
-
 const scrollGallery = (dir) => {
   const amount = track.clientWidth * 0.8 * dir;
   track.scrollBy({ left: amount, behavior: "smooth" });
@@ -97,3 +37,120 @@ const scrollGallery = (dir) => {
 
 document.querySelector("[data-gallery-prev]").addEventListener("click", () => scrollGallery(-1));
 document.querySelector("[data-gallery-next]").addEventListener("click", () => scrollGallery(1));
+
+let galleryPointer = null;
+let galleryStartX = 0;
+let galleryStartY = 0;
+let galleryScroll = 0;
+let galleryAxis = null;
+let galleryMoved = false;
+let galleryLastX = 0;
+let galleryLastTime = 0;
+let galleryVelocity = 0;
+let galleryRaf = 0;
+let galleryNextLeft = null;
+let galleryCoastRaf = 0;
+
+const maxGalleryScroll = () => track.scrollWidth - track.clientWidth;
+
+const applyGalleryScroll = () => {
+  galleryRaf = 0;
+  if (galleryNextLeft === null) {
+    return;
+  }
+  track.scrollLeft = galleryNextLeft;
+};
+
+const stopGalleryCoast = () => {
+  if (galleryCoastRaf) {
+    cancelAnimationFrame(galleryCoastRaf);
+    galleryCoastRaf = 0;
+  }
+};
+
+const coastGallery = () => {
+  const max = maxGalleryScroll();
+  galleryVelocity *= 0.92;
+  const next = Math.max(0, Math.min(max, track.scrollLeft - galleryVelocity));
+  track.scrollLeft = next;
+
+  if (Math.abs(galleryVelocity) > 0.35 && next > 0 && next < max) {
+    galleryCoastRaf = requestAnimationFrame(coastGallery);
+    return;
+  }
+
+  galleryCoastRaf = 0;
+  galleryVelocity = 0;
+};
+
+track.addEventListener("pointerdown", (event) => {
+  if (event.button !== 0) {
+    return;
+  }
+
+  stopGalleryCoast();
+  galleryPointer = event.pointerId;
+  galleryStartX = event.clientX;
+  galleryStartY = event.clientY;
+  galleryLastX = event.clientX;
+  galleryLastTime = event.timeStamp;
+  galleryScroll = track.scrollLeft;
+  galleryAxis = event.pointerType === "mouse" ? "x" : null;
+  galleryMoved = false;
+  galleryVelocity = 0;
+  track.setPointerCapture(event.pointerId);
+});
+
+track.addEventListener("pointermove", (event) => {
+  if (galleryPointer !== event.pointerId) {
+    return;
+  }
+
+  const deltaX = event.clientX - galleryStartX;
+  const deltaY = event.clientY - galleryStartY;
+
+  if (!galleryAxis) {
+    if (Math.abs(deltaX) < 8 && Math.abs(deltaY) < 8) {
+      return;
+    }
+    galleryAxis = Math.abs(deltaX) > Math.abs(deltaY) ? "x" : "y";
+    if (galleryAxis === "y") {
+      track.releasePointerCapture(event.pointerId);
+      galleryPointer = null;
+      return;
+    }
+  }
+
+  if (galleryAxis !== "x") {
+    return;
+  }
+
+  const now = event.timeStamp;
+  const dt = Math.max(1, now - galleryLastTime);
+  galleryVelocity = ((event.clientX - galleryLastX) / dt) * 16;
+  galleryLastX = event.clientX;
+  galleryLastTime = now;
+  galleryMoved = true;
+  track.classList.add("is-dragging");
+  galleryNextLeft = galleryScroll - deltaX;
+  if (!galleryRaf) {
+    galleryRaf = requestAnimationFrame(applyGalleryScroll);
+  }
+});
+
+const stopGalleryDrag = (event) => {
+  if (galleryPointer !== event.pointerId) {
+    return;
+  }
+
+  galleryPointer = null;
+  galleryAxis = null;
+  track.classList.remove("is-dragging");
+
+  if (galleryMoved) {
+    coastGallery();
+  }
+};
+
+track.addEventListener("pointerup", stopGalleryDrag);
+track.addEventListener("pointercancel", stopGalleryDrag);

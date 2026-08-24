@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>White Wolf Studio — Website Showcase</title>
+    <style>
+      :root {
+        --bg: #111110;
+        --paper: #f3f1ec;
+        --muted: #9a9790;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--paper);
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+      header {
+        padding: 2.5rem 6vw 1.5rem;
+        border-bottom: 1px solid #2a2926;
+      }
+      h1 {
+        margin: 0 0 0.4rem;
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      header p { margin: 0; color: var(--muted); max-width: 52ch; }
+      nav {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 6vw;
+        position: sticky;
+        top: 0;
+        background: #111110ee;
+        backdrop-filter: blur(8px);
+        z-index: 2;
+      }
+      nav a {
+        color: var(--paper);
+        text-decoration: none;
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border-bottom: 1px solid transparent;
+      }
+      nav a:hover { border-bottom-color: var(--paper); }
+      section { padding: 2rem 6vw 3rem; }
+      h2 {
+        font-size: 0.85rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 0 0 1.4rem;
+      }
+      figure {
+        margin: 0 0 2.4rem;
+        background: #1a1917;
+        padding: 0.8rem;
+      }
+      img {
+        width: 100%;
+        height: auto;
+        display: block;
+        background: #000;
+      }
+      figcaption {
+        padding: 0.7rem 0.2rem 0.2rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+      }
+      .grid figure { margin-bottom: 0; }
+      @media (max-width: 800px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>White Wolf Studio — Dark redesign</h1>
+      <p>
+        Dark-theme redesign screenshots for client review. Desktop is 1440px at 2x
+        retina. Mobile is iPhone-sized at 3x. Original light-site shots are in
+        <a href="../client-showcase/index.html" style="color:inherit">client-showcase</a>.
+      </p>
+    </header>
+    <nav>
+      <a href="#desktop">Desktop</a>
+      <a href="#mobile">Mobile</a>
+      <a href="#full">Full page</a>
+    </nav>
+
+    <section id="desktop">
+      <h2>Desktop — 1440 × retina</h2>
+      <figure>
+        <img src="desktop/01-hero.png" alt="Hero section" />
+        <figcaption>01 — Hero</figcaption>
+      </figure>
+      <figure>
+        <img src="desktop/02-story.png" alt="About section" />
+        <figcaption>02 — About us</figcaption>
+      </figure>
+      <figure>
+        <img src="desktop/03-studio-visit.png" alt="Newstead studio details" />
+        <figcaption>03 — The suite, hours, and contact</figcaption>
+      </figure>
+      <figure>
+        <img src="desktop/04-booking.png" alt="Timely booking embed" />
+        <figcaption>04 — Booking with Timely embed</figcaption>
+      </figure>
+      <figure>
+        <img src="desktop/05-work.png" alt="Work gallery" />
+        <figcaption>05 — Work gallery</figcaption>
+      </figure>
+      <figure>
+        <img src="desktop/05-work-gallery-scrolled.png" alt="Work gallery scrolled" />
+        <figcaption>05b — Gallery after scrolling</figcaption>
+      </figure>
+      <figure>
+        <img src="desktop/06-policies-banner.png" alt="House rules banner" />
+        <figcaption>06 — House rules</figcaption>
+      </figure>
+      <figure>
+        <img src="desktop/07-policies-details.png" alt="Policies" />
+        <figcaption>07 — Policies</figcaption>
+      </figure>
+      <figure>
+        <img src="desktop/08-footer.png" alt="Footer" />
+        <figcaption>08 — Footer</figcaption>
+      </figure>
+      <figure>
+        <img src="desktop/09-menu-overlay.png" alt="Full screen menu" />
+        <figcaption>09 — Full-screen menu</figcaption>
+      </figure>
+    </section>
+
+    <section id="mobile">
+      <h2>Mobile — iPhone, 3x</h2>
+      <div class="grid">
+        <figure>
+          <img src="mobile/01-hero.png" alt="Mobile hero" />
+          <figcaption>Hero</figcaption>
+        </figure>
+        <figure>
+          <img src="mobile/02-story-section.png" alt="Mobile about" />
+          <figcaption>About</figcaption>
+        </figure>
+        <figure>
+          <img src="mobile/03-studio-visit-section.png" alt="Mobile visit" />
+          <figcaption>Studio / visit</figcaption>
+        </figure>
+        <figure>
+          <img src="mobile/04-booking.png" alt="Mobile booking" />
+          <figcaption>Booking</figcaption>
+        </figure>
+        <figure>
+          <img src="mobile/04-booking-section.png" alt="Full mobile booking section" />
+          <figcaption>Full booking section</figcaption>
+        </figure>
+        <figure>
+          <img src="mobile/05-work-section.png" alt="Mobile work" />
+          <figcaption>Work</figcaption>
+        </figure>
+        <figure>
+          <img src="mobile/06-policies-banner-section.png" alt="Mobile policies banner" />
+          <figcaption>House rules</figcaption>
+        </figure>
+        <figure>
+          <img src="mobile/07-policies-details-section.png" alt="Mobile policies" />
+          <figcaption>Policies</figcaption>
+        </figure>
+        <figure>
+          <img src="mobile/08-footer-section.png" alt="Mobile footer" />
+          <figcaption>Footer</figcaption>
+        </figure>
+        <figure>
+          <img src="mobile/09-menu-overlay.png" alt="Mobile menu" />
+          <figcaption>Menu</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="full">
+      <h2>Full-page captures</h2>
+      <figure>
+        <img src="desktop/00-full-page.png" alt="Full desktop homepage" />
+        <figcaption>Desktop full page</figcaption>
+      </figure>
+      <figure>
+        <img src="mobile/00-full-page.png" alt="Full mobile homepage" />
+        <figcaption>Mobile full page</figcaption>
+      </figure>
+    </section>
+  </body>
+</html>
