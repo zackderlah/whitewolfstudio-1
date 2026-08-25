@@ -484,7 +484,6 @@ p {
   bottom: 0;
   width: 42%;
   aspect-ratio: 3 / 4;
-  border: 8px solid var(--black);
 }
 
 .story-copy .lede {
@@ -1066,7 +1065,6 @@ p {
 
   .about-inset {
     width: 46%;
-    border-width: 5px;
   }
 
   h2 {
