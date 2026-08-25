@@ -363,7 +363,7 @@ p {
 
 .hero-copy .lede {
   max-width: 42ch;
-  margin: 1.4rem 0 0.5rem;
+  margin: 1.4rem 0 0.5rem 20px;
   color: var(--ink);
   font-size: 0.92rem;
   letter-spacing: 0.04em;
@@ -481,7 +481,7 @@ p {
 .about-inset {
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: -50px;
   width: 42%;
   aspect-ratio: 3 / 4;
 }
@@ -1018,7 +1018,7 @@ p {
 
   .hero-copy .lede {
     max-width: none;
-    margin: 0.9rem 0 0.35rem;
+    margin: 0.9rem 0 0.35rem 20px;
     font-size: 0.78rem;
     letter-spacing: 0.03em;
     line-height: 1.55;
