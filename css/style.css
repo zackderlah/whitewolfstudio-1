@@ -195,18 +195,9 @@ p {
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
   text-decoration: none;
+  color: inherit;
   justify-self: start;
-}
-
-.brand-mark,
-.menu-mark {
-  width: 2.1rem;
-  height: 2.1rem;
-  object-fit: cover;
-  border-radius: 50%;
-  filter: grayscale(1) brightness(1.15);
 }
 
 .brand-word {
@@ -418,8 +409,6 @@ p {
 }
 
 .hero-photo img,
-.about-main img,
-.about-inset img,
 .gallery-track img,
 .policies-banner img {
   width: 100%;
@@ -436,7 +425,6 @@ p {
   object-position: 50% 42%;
 }
 
-.story,
 .visit,
 .booking,
 .work,
@@ -446,52 +434,12 @@ p {
   scroll-margin-top: calc(var(--header) - 1px);
 }
 
-.story,
 .visit,
 .booking,
 .work,
 .policies-list,
 .site-footer {
   padding: clamp(3.5rem, 8vw, 6.5rem) var(--gutter);
-}
-
-.story {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: clamp(2rem, 5vw, 5rem);
-  align-items: center;
-}
-
-.about-media {
-  position: relative;
-  min-height: 62vh;
-}
-
-.about-main,
-.about-inset {
-  margin: 0;
-  overflow: hidden;
-}
-
-.about-main {
-  width: 78%;
-  aspect-ratio: 1;
-}
-
-.about-inset {
-  position: absolute;
-  right: 0;
-  bottom: -50px;
-  width: 42%;
-  aspect-ratio: 3 / 4;
-}
-
-.story-copy .lede {
-  max-width: 46ch;
-  margin: 1.2rem 0 1.8rem;
-  color: var(--muted);
-  font-size: 0.98rem;
-  line-height: 1.7;
 }
 
 .section-head {
@@ -518,9 +466,20 @@ p {
   text-align: center;
 }
 
+.booking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.booking .section-head {
+  width: 100%;
+  max-width: 40rem;
+}
+
 .booking .section-intro {
-  margin: 0 0 1.8rem;
-  text-align: left;
+  margin: 0 auto 1.8rem;
+  text-align: center;
 }
 
 .aside {
@@ -600,25 +559,37 @@ p {
 
 .visit-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 2rem;
-  padding: 1.8rem 0 2.2rem;
+  align-items: start;
+  padding: 1.65rem 1.35rem 1.4rem;
+}
+
+.visit-grid h3 {
+  margin: 0 0 0.75rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.3;
 }
 
 .visit-grid p,
 .visit-grid a {
   font-size: 0.95rem;
+  line-height: 1.7;
   text-decoration: none;
 }
 
 .booking-split {
   display: grid;
-  grid-template-columns: minmax(16rem, 0.88fr) minmax(22rem, 1.12fr);
-  gap: 1.6rem 2rem;
-  align-items: start;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1.6rem;
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
 }
 
-.price-list h3,
 .book-policy h3 {
   margin: 0 0 0.65rem;
   font-size: 0.72rem;
@@ -627,45 +598,10 @@ p {
   color: var(--muted);
 }
 
-.price-list h3:not(:first-child) {
-  margin-top: 1.25rem;
-}
-
-.price-rows {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--line);
-}
-
-.price-rows li {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem;
-  padding: 0.42rem 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 0.88rem;
-}
-
-.price-rows i {
-  display: block;
-  margin-top: 0.08rem;
-  font-style: normal;
-  color: var(--muted);
-  font-size: 0.7rem;
-  letter-spacing: 0.04em;
-}
-
-.price-rows b {
-  font-weight: 600;
-  white-space: nowrap;
-}
-
 .book-policy {
-  margin-top: 1.4rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--line-strong);
+  margin: 0 auto;
+  max-width: 40rem;
+  text-align: center;
 }
 
 .book-policy p {
@@ -680,11 +616,17 @@ p {
 }
 
 .book-embed {
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
   border: 1px solid var(--line-strong);
   background: var(--paper);
 }
 
 .timely-frame {
+  width: 100%;
+  max-width: 40rem;
+  margin-inline: auto;
   background: #141414;
   min-height: 760px;
   overflow: hidden;
@@ -702,6 +644,7 @@ p {
 .book-embed .form-note {
   margin: 0;
   padding: 1rem var(--gutter) 1.15rem;
+  text-align: center;
 }
 
 .form-note {
@@ -941,7 +884,7 @@ p {
 @media (max-width: 980px) {
   :root {
     --header: 4.15rem;
-    --gutter: 1.15rem;
+    --gutter: 1.4rem;
   }
 
   .icon-btn {
@@ -952,10 +895,14 @@ p {
     display: none;
   }
 
+  #visit {
+    display: none;
+  }
+
   .header-book {
-    min-height: 2.35rem;
-    padding: 0.5rem 0.85rem;
-    font-size: 0.62rem;
+    min-height: 2.5rem;
+    padding: 0.55rem 0.95rem;
+    font-size: 0.64rem;
   }
 
   .site-header {
@@ -970,6 +917,10 @@ p {
   .brand-word {
     font-size: 0.7rem;
     letter-spacing: 0.14em;
+  }
+
+  .menu-nav {
+    gap: 0.85rem;
   }
 
   .menu-nav a {
@@ -1009,7 +960,7 @@ p {
   }
 
   .hero-copy {
-    padding: 1.6rem var(--gutter) 2.2rem;
+    padding: 1.85rem var(--gutter) 2.6rem;
   }
 
   h1 {
@@ -1018,63 +969,44 @@ p {
 
   .hero-copy .lede {
     max-width: none;
-    margin: 0.9rem 0 0.35rem 0;
-    font-size: 0.78rem;
-    letter-spacing: 0.03em;
-    line-height: 1.55;
+    margin: 1.05rem 0 0.55rem 0;
+    font-size: 0.88rem;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
+    text-transform: none;
   }
 
   .hero-end {
     align-self: start;
     font-size: clamp(2rem, 10vw, 2.8rem);
-    margin: 0 0 1.4rem;
+    margin: 0 0 1.75rem;
   }
 
   .hero-base {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 0.9rem;
+    gap: 0;
+  }
+
+  .hero-base .socials {
+    display: none;
   }
 
   .hero-base .btn {
     order: -1;
+    min-width: 10.5rem;
   }
 
-  .story,
   .visit,
   .booking,
   .work,
   .site-footer {
-    padding: 2.4rem var(--gutter);
-  }
-
-  .story {
-    grid-template-columns: 1fr;
-    gap: 1.6rem;
-  }
-
-  .about-media {
-    min-height: 0;
-  }
-
-  .about-main {
-    width: 92%;
-    aspect-ratio: 4 / 5;
-  }
-
-  .about-inset {
-    width: 46%;
+    padding: 3.15rem var(--gutter);
   }
 
   h2 {
     font-size: clamp(1.85rem, 9vw, 2.6rem);
-  }
-
-  .story-copy .lede {
-    max-width: none;
-    margin: 0.9rem 0 1.3rem;
-    font-size: 0.92rem;
   }
 
   .section-head {
@@ -1113,7 +1045,7 @@ p {
 
   .visit-grid {
     gap: 1.4rem;
-    padding: 1.3rem 0 1.6rem;
+    padding: 1.4rem 1.15rem 1.25rem;
   }
 
   .booking-split {
@@ -1194,12 +1126,40 @@ p {
 }
 
 @media (max-width: 640px) {
+  :root {
+    --gutter: 1.55rem;
+  }
+
   .gallery-nav {
     display: none;
   }
 
   .hero-photo img {
-    height: min(52vh, 22rem);
+    height: min(46vh, 20rem);
+  }
+
+  .hero-copy {
+    padding: 2rem var(--gutter) 2.85rem;
+  }
+
+  .hero-copy .lede {
+    margin: 1.15rem 0 0.7rem 0;
+  }
+
+  .hero-end {
+    margin: 0 0 1.9rem;
+  }
+
+  .visit,
+  .booking,
+  .work,
+  .site-footer {
+    padding: 3.5rem var(--gutter);
+  }
+
+  .gallery-track img {
+    height: 40vh;
+    min-height: 220px;
   }
 
   .timely-frame,

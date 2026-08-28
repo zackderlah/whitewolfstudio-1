@@ -79,12 +79,10 @@
         <span class="burger" aria-hidden="true"></span>
       </button>
       <a class="brand" href="#top" aria-label="White Wolf Studio home">
-        <img src="assets/images/logo.png" alt="" class="brand-mark" width="48" height="48" />
         <span class="brand-word">White Wolf</span>
       </a>
       <nav class="header-nav" aria-label="Primary">
         <a href="#top">Home</a>
-        <a href="#studio">About</a>
         <a href="#work">Gallery</a>
         <a href="#visit">Contact</a>
       </nav>
@@ -99,15 +97,13 @@
           <span class="sr-only">Close menu</span>
           <span class="close" aria-hidden="true"></span>
         </button>
-        <img src="assets/images/logo.png" alt="" class="menu-mark" width="56" height="56" />
+        <span></span>
         <span></span>
       </div>
       <nav class="menu-nav" aria-label="Primary">
         <a href="#top">Home</a>
-        <a href="#studio">About us</a>
         <a href="#timely">Book now</a>
         <a href="#work">Gallery</a>
-        <a href="#visit">Contact</a>
         <a href="#policies">Policies</a>
       </nav>
       <div class="menu-foot">
@@ -161,35 +157,79 @@
         <figure class="hero-photo">
           <img
             src="assets/images/opt/work-hero.jpg"
-            alt="Textured mullet with a fade, photographed at White Wolf Studio"
+            alt="Barber cutting a client's hair at White Wolf Studio"
           />
         </figure>
       </section>
 
-      <section class="story" id="studio">
-        <div class="about-media">
-          <figure class="about-main">
-            <img
-              src="assets/images/opt/work-10.jpg"
-              alt="White Wolf Studio stylist finishing a fade in the Newstead suite"
-            />
-          </figure>
-          <figure class="about-inset">
-            <img
-              src="assets/images/opt/work-09.jpg"
-              alt="Finished mid fade photographed in the White Wolf Studio interior"
-            />
-          </figure>
+      <section class="work" id="work">
+        <div class="section-head center">
+          <div>
+            <p class="meta-label">Our gallery</p>
+            <h2>A showcase of our barbering.</h2>
+          </div>
+          <a class="text-link" href="https://www.instagram.com/whitewolfbarbers/" target="_blank" rel="noreferrer"
+            >View all on Instagram</a
+          >
         </div>
-        <div class="story-copy">
-          <p class="meta-label">About us</p>
-          <h2>A quieter kind of barber shop.</h2>
-          <p class="lede">
-            Located in Newstead, White Wolf Studio is a contemporary barber shop welcome to everyone.
-            We focus on quality over quantity while providing the best service possible — unhurried
-            cuts, precise fades, and a chair that is yours for the appointment.
-          </p>
-          <a class="btn btn-ghost" href="#book">Learn more</a>
+        <div class="gallery" data-gallery>
+          <button class="gallery-nav prev" type="button" data-gallery-prev aria-label="Previous work"></button>
+          <div class="gallery-track" data-gallery-track>
+            <figure><img src="assets/images/opt/work-08.jpg" alt="Textured crop with a clean low fade" /></figure>
+            <figure><img src="assets/images/opt/work-09.jpg" alt="Mid skin fade with natural texture on top" /></figure>
+            <figure><img src="assets/images/opt/work-12.jpg" alt="French crop with a blunt fringe and fade" /></figure>
+            <figure><img src="assets/images/opt/work-04.jpg" alt="Salt-and-pepper modern mullet with a skin fade" /></figure>
+            <figure><img src="assets/images/work-02.jpg" alt="High burst fade with a straight crop fringe" /></figure>
+            <figure><img src="assets/images/work-05.jpg" alt="Taper fade with defined texture on top" /></figure>
+            <figure><img src="assets/images/work-06.jpg" alt="High skin fade and a clean beard line-up" /></figure>
+            <figure><img src="assets/images/opt/work-11.jpg" alt="Finished cut photographed in studio light" /></figure>
+          </div>
+          <button class="gallery-nav next" type="button" data-gallery-next aria-label="Next work"></button>
+        </div>
+      </section>
+
+      <section class="booking" id="book">
+        <div class="section-head center">
+          <div>
+            <p class="meta-label">Our services</p>
+            <h2>Schedule your service.</h2>
+          </div>
+          <a
+            class="text-link"
+            href="https://bookings.gettimely.com/whitewolfstudioairbystacey/bb/book?location=273227"
+            target="_blank"
+            rel="noreferrer"
+            >Open in a new tab</a
+          >
+        </div>
+
+        <div class="booking-split">
+          <div class="book-aside">
+            <div class="book-policy">
+              <h3>Deposit &amp; timing</h3>
+              <p>A 50% deposit is required for all bookings to secure your appointment. It is applied to your service total.</p>
+              <p>Arrive on time. More than 15 minutes late is treated as a late cancellation, and a fee may apply. We need at least 12 hours’ notice for changes or cancellations; inside 12 hours a fee may apply.</p>
+            </div>
+          </div>
+          <aside class="book-embed">
+            <div class="timely-frame" id="timely">
+              <iframe
+                title="Book White Wolf Studio in Timely"
+                src="https://bookings.gettimely.com/whitewolfstudioairbystacey/bb/book?location=273227"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+            <p class="form-note">
+              Book in Timely. If the calendar doesn’t load,
+              <a
+                href="https://bookings.gettimely.com/whitewolfstudioairbystacey/bb/book?location=273227"
+                target="_blank"
+                rel="noreferrer"
+                >open Timely in a new tab</a
+              >.
+            </p>
+          </aside>
         </div>
       </section>
 
@@ -199,7 +239,6 @@
             <p class="meta-label">The studio</p>
             <h2>One suite.<br />Proper time in the chair.</h2>
           </div>
-          <p class="aside">From Newstead, with care</p>
         </div>
         <p class="find-us">
           Look for <strong>Freedom Suites</strong> on Breakfast Creek Road, then
@@ -237,103 +276,6 @@
               </p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="booking" id="book">
-        <div class="section-head">
-          <div>
-            <p class="meta-label">Our services</p>
-            <h2>Schedule your service.</h2>
-          </div>
-          <a
-            class="text-link"
-            href="https://bookings.gettimely.com/whitewolfstudioairbystacey/bb/book?location=273227"
-            target="_blank"
-            rel="noreferrer"
-            >Open in a new tab</a
-          >
-        </div>
-        <p class="section-intro">Your chair is waiting. Prices on the left, live times in Timely.</p>
-
-        <div class="booking-split">
-          <div class="book-aside">
-            <div class="price-list">
-              <h3>Cuts &amp; beard</h3>
-              <ul class="price-rows">
-                <li><span>Haircut <i>30 min</i></span><b>$67.50</b></li>
-                <li><span>Haircut &amp; wash <i>45 min</i></span><b>$77.50</b></li>
-                <li><span>Restyle <i>45 min</i></span><b>$75</b></li>
-                <li><span>Restyle &amp; wash <i>1 hr</i></span><b>$85</b></li>
-                <li><span>Skin / zero fade <i>45 min</i></span><b>$72.50</b></li>
-                <li><span>Skin / zero fade &amp; wash <i>1 hr</i></span><b>$82.50</b></li>
-                <li><span>Beard trim, clippers only <i>15 min</i></span><b>$35</b></li>
-                <li><span>Beard trim &amp; cut-throat line up <i>30 min</i></span><b>$47.50</b></li>
-                <li><span>Faded buzz cut <i>30 min</i></span><b>$55</b></li>
-                <li><span>Buzz cut <i>15 min</i></span><b>$45</b></li>
-                <li><span>Kids cut <i>30 min · up to 15</i></span><b>$50</b></li>
-                <li><span>Cut-throat shave <i>45 min</i></span><b>$70</b></li>
-              </ul>
-              <h3>Colour, wax &amp; perm</h3>
-              <ul class="price-rows">
-                <li><span>Grey blending (camo) <i>30 min</i></span><b>$70</b></li>
-                <li><span>Eyebrow wax <i>15 min</i></span><b>$25</b></li>
-                <li><span>Nose wax <i>15 min</i></span><b>$25</b></li>
-                <li><span>Ear wax <i>15 min</i></span><b>$25</b></li>
-                <li><span>Down perm <i>45 min · consult required</i></span><b>$65</b></li>
-              </ul>
-            </div>
-            <div class="book-policy">
-              <h3>Deposit &amp; timing</h3>
-              <p>A 50% deposit is required for all bookings to secure your appointment. It is applied to your service total.</p>
-              <p>Arrive on time. More than 15 minutes late is treated as a late cancellation, and a fee may apply. We need at least 12 hours’ notice for changes or cancellations; inside 12 hours a fee may apply.</p>
-            </div>
-          </div>
-          <aside class="book-embed">
-            <div class="timely-frame" id="timely">
-              <iframe
-                title="Book White Wolf Studio in Timely"
-                src="https://bookings.gettimely.com/whitewolfstudioairbystacey/bb/book?location=273227"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-            <p class="form-note">
-              Book in Timely. If the calendar doesn’t load,
-              <a
-                href="https://bookings.gettimely.com/whitewolfstudioairbystacey/bb/book?location=273227"
-                target="_blank"
-                rel="noreferrer"
-                >open Timely in a new tab</a
-              >.
-            </p>
-          </aside>
-        </div>
-      </section>
-
-      <section class="work" id="work">
-        <div class="section-head center">
-          <div>
-            <p class="meta-label">Our gallery</p>
-            <h2>A showcase of our barbering.</h2>
-          </div>
-          <a class="text-link" href="https://www.instagram.com/whitewolfbarbers/" target="_blank" rel="noreferrer"
-            >View all on Instagram</a
-          >
-        </div>
-        <div class="gallery" data-gallery>
-          <button class="gallery-nav prev" type="button" data-gallery-prev aria-label="Previous work"></button>
-          <div class="gallery-track" data-gallery-track>
-            <figure><img src="assets/images/opt/work-08.jpg" alt="Textured crop with a clean low fade" /></figure>
-            <figure><img src="assets/images/opt/work-09.jpg" alt="Mid skin fade with natural texture on top" /></figure>
-            <figure><img src="assets/images/opt/work-12.jpg" alt="French crop with a blunt fringe and fade" /></figure>
-            <figure><img src="assets/images/opt/work-04.jpg" alt="Salt-and-pepper modern mullet with a skin fade" /></figure>
-            <figure><img src="assets/images/work-02.jpg" alt="High burst fade with a straight crop fringe" /></figure>
-            <figure><img src="assets/images/work-05.jpg" alt="Taper fade with defined texture on top" /></figure>
-            <figure><img src="assets/images/work-06.jpg" alt="High skin fade and a clean beard line-up" /></figure>
-            <figure><img src="assets/images/opt/work-11.jpg" alt="Finished cut photographed in studio light" /></figure>
-          </div>
-          <button class="gallery-nav next" type="button" data-gallery-next aria-label="Next work"></button>
         </div>
       </section>
 
@@ -399,7 +341,7 @@
             </p>
           </div>
           <nav>
-            <a href="#studio">About</a>
+            <a href="#visit">About</a>
             <a href="#timely">Book</a>
             <a href="#work">Gallery</a>
             <a href="#policies">Policies</a>
