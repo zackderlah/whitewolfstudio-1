@@ -30,14 +30,6 @@ document.querySelectorAll("[data-acc-btn]").forEach((btn) => {
   });
 });
 
-const scrollGallery = (dir) => {
-  const amount = track.clientWidth * 0.8 * dir;
-  track.scrollBy({ left: amount, behavior: "smooth" });
-};
-
-document.querySelector("[data-gallery-prev]").addEventListener("click", () => scrollGallery(-1));
-document.querySelector("[data-gallery-next]").addEventListener("click", () => scrollGallery(1));
-
 let galleryPointer = null;
 let galleryStartX = 0;
 let galleryStartY = 0;
