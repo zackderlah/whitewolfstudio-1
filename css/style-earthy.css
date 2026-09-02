@@ -398,8 +398,8 @@ p {
   margin: 1.4rem 0 0.5rem 0;
   color: var(--ink);
   font-size: 0.92rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-transform: none;
   line-height: 1.65;
 }
 
@@ -455,7 +455,14 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.hero-photo img {
   filter: sepia(0.42) saturate(0.88) hue-rotate(12deg) contrast(1.04);
+}
+
+.gallery-track img {
+  filter: none;
 }
 
 .hero-photo img {
@@ -528,16 +535,41 @@ p {
 }
 
 .find-us {
-  max-width: 52ch;
-  margin: 0 0 1.5rem;
-  color: var(--muted);
-  font-size: 0.98rem;
-  line-height: 1.65;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 0 2.25rem;
+  padding: 0.15rem 0 0;
+  border-top: 1px solid var(--line);
 }
 
-.find-us strong {
+.find-us article {
+  padding: 1.35rem clamp(1rem, 2vw, 1.75rem) 1.5rem;
+  border-right: 1px solid var(--line);
+}
+
+.find-us article:first-child {
+  padding-left: 0;
+}
+
+.find-us article:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.find-us h3 {
+  margin: 0 0 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.find-us p {
   color: var(--ink);
-  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.65;
 }
 
 .visit-board {
@@ -629,31 +661,6 @@ p {
   width: 100%;
   max-width: 40rem;
   margin-inline: auto;
-}
-
-.book-policy h3 {
-  margin: 0 0 0.65rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.book-policy {
-  margin: 0 auto;
-  max-width: 40rem;
-  text-align: center;
-}
-
-.book-policy p {
-  margin: 0 0 0.7rem;
-  font-size: 0.84rem;
-  color: var(--muted);
-  line-height: 1.55;
-}
-
-.book-policy p:last-child {
-  margin-bottom: 0;
 }
 
 .book-embed {
@@ -793,9 +800,9 @@ p {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(44, 36, 26, 0.88) 0%,
-    rgba(44, 36, 26, 0.42) 48%,
-    rgba(44, 36, 26, 0.18) 100%
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.22) 42%,
+    rgba(0, 0, 0, 0.08) 100%
   );
 }
 
@@ -950,10 +957,6 @@ p {
     display: none;
   }
 
-  #visit {
-    display: none;
-  }
-
   .header-book {
     min-height: 2.5rem;
     padding: 0.55rem 0.95rem;
@@ -1101,6 +1104,22 @@ p {
   .visit-grid {
     gap: 1.4rem;
     padding: 1.4rem 1.15rem 1.25rem;
+  }
+
+  .find-us {
+    grid-template-columns: 1fr;
+    margin-bottom: 1.75rem;
+  }
+
+  .find-us article {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 1.15rem 0 1.25rem;
+  }
+
+  .find-us article:last-child {
+    border-bottom: 0;
+    padding-bottom: 0.15rem;
   }
 
   .booking-split {
