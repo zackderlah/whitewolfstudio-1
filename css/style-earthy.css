@@ -769,6 +769,7 @@ p {
   position: absolute;
   inset: 0;
   height: 100%;
+  object-position: 50% 38%;
 }
 
 .policies-veil {
