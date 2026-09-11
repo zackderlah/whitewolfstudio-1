@@ -1,7 +1,14 @@
 {
   "name": "whitewolfstudio",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "npx --yes serve -l 5173"
+    "dev": "node scripts/dev-server.mjs",
+    "dev:static": "npx --yes serve -l 5173",
+    "seed:sanity": "node scripts/seed-sanity.mjs",
+    "patch:sanity": "node scripts/patch-sanity-defaults.mjs"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.29.1"
   }
 }

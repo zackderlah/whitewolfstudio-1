@@ -425,6 +425,47 @@ p {
   overflow: hidden;
 }
 
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-copy > h1,
+.hero-copy > .lede,
+.hero-copy > .hero-end,
+.hero-copy > .hero-base,
+.hero-photo {
+  opacity: 0;
+  animation: hero-fade-in 0.85s var(--ease) forwards;
+}
+
+.hero-copy > h1 {
+  animation-delay: 0.05s;
+}
+
+.hero-copy > .lede {
+  animation-delay: 0.18s;
+}
+
+.hero-copy > .hero-end {
+  animation-delay: 0.3s;
+}
+
+.hero-copy > .hero-base {
+  animation-delay: 0.42s;
+}
+
+.hero-photo {
+  animation-delay: 0.12s;
+}
+
 .hero-photo img,
 .gallery-track img,
 .policies-banner img {
@@ -1210,5 +1251,15 @@ p {
 
   .btn {
     transition: none;
+  }
+
+  .hero-copy > h1,
+  .hero-copy > .lede,
+  .hero-copy > .hero-end,
+  .hero-copy > .hero-base,
+  .hero-photo {
+    opacity: 1;
+    animation: none;
+    transform: none;
   }
 }
