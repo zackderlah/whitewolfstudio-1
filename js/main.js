@@ -1,148 +1,179 @@
-const header = document.querySelector("[data-header]");
-const menu = document.querySelector("[data-menu]");
-const openBtn = document.querySelector("[data-menu-open]");
-const closeBtn = document.querySelector("[data-menu-close]");
-const track = document.querySelector("[data-gallery-track]");
+const init = () => {
+  const header = document.querySelector("[data-header]");
+  const menu = document.querySelector("[data-menu]");
+  const openBtn = document.querySelector("[data-menu-open]");
+  const closeBtn = document.querySelector("[data-menu-close]");
+  const track = document.querySelector("[data-gallery-track]");
 
-const setHeader = () => {
-  header.classList.toggle("is-solid", window.scrollY > 24);
-};
+  if (header) {
+    const setHeader = () => {
+      header.classList.toggle("is-solid", window.scrollY > 24);
+    };
 
-const toggleMenu = (open) => {
-  menu.hidden = !open;
-  openBtn.setAttribute("aria-expanded", String(open));
-  document.body.style.overflow = open ? "hidden" : "";
-};
+    window.addEventListener("scroll", setHeader, { passive: true });
+    setHeader();
+  }
 
-openBtn.addEventListener("click", () => toggleMenu(true));
-closeBtn.addEventListener("click", () => toggleMenu(false));
-menu.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => toggleMenu(false));
-});
+  if (menu && openBtn && closeBtn) {
+    const toggleMenu = (open) => {
+      menu.hidden = !open;
+      openBtn.setAttribute("aria-expanded", String(open));
+      document.body.style.overflow = open ? "hidden" : "";
+    };
 
-window.addEventListener("scroll", setHeader, { passive: true });
-setHeader();
+    openBtn.addEventListener("click", () => toggleMenu(true));
+    closeBtn.addEventListener("click", () => toggleMenu(false));
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => toggleMenu(false));
+    });
+  }
 
-document.querySelectorAll("[data-acc-btn]").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const expanded = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!expanded));
+  document.querySelectorAll("[data-acc-btn]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      btn.setAttribute("aria-expanded", String(!expanded));
+    });
   });
-});
 
-let galleryPointer = null;
-let galleryStartX = 0;
-let galleryStartY = 0;
-let galleryScroll = 0;
-let galleryAxis = null;
-let galleryMoved = false;
-let galleryLastX = 0;
-let galleryLastTime = 0;
-let galleryVelocity = 0;
-let galleryRaf = 0;
-let galleryNextLeft = null;
-let galleryCoastRaf = 0;
-
-const maxGalleryScroll = () => track.scrollWidth - track.clientWidth;
-
-const applyGalleryScroll = () => {
-  galleryRaf = 0;
-  if (galleryNextLeft === null) {
+  if (!track) {
     return;
   }
-  track.scrollLeft = galleryNextLeft;
-};
 
-const stopGalleryCoast = () => {
-  if (galleryCoastRaf) {
-    cancelAnimationFrame(galleryCoastRaf);
+  let galleryPointer = null;
+  let galleryStartX = 0;
+  let galleryStartY = 0;
+  let galleryScroll = 0;
+  let galleryAxis = null;
+  let galleryMoved = false;
+  let galleryLastX = 0;
+  let galleryLastTime = 0;
+  let galleryVelocity = 0;
+  let galleryRaf = 0;
+  let galleryNextLeft = null;
+  let galleryCoastRaf = 0;
+
+  const maxGalleryScroll = () => track.scrollWidth - track.clientWidth;
+
+  const applyGalleryScroll = () => {
+    galleryRaf = 0;
+    if (galleryNextLeft === null) {
+      return;
+    }
+    track.scrollLeft = galleryNextLeft;
+  };
+
+  const stopGalleryCoast = () => {
+    if (galleryCoastRaf) {
+      cancelAnimationFrame(galleryCoastRaf);
+      galleryCoastRaf = 0;
+    }
+  };
+
+  const coastGallery = () => {
+    const max = maxGalleryScroll();
+    galleryVelocity *= 0.92;
+    const next = Math.max(0, Math.min(max, track.scrollLeft - galleryVelocity));
+    track.scrollLeft = next;
+
+    if (Math.abs(galleryVelocity) > 0.35 && next > 0 && next < max) {
+      galleryCoastRaf = requestAnimationFrame(coastGallery);
+      return;
+    }
+
     galleryCoastRaf = 0;
-  }
-};
+    galleryVelocity = 0;
+  };
 
-const coastGallery = () => {
-  const max = maxGalleryScroll();
-  galleryVelocity *= 0.92;
-  const next = Math.max(0, Math.min(max, track.scrollLeft - galleryVelocity));
-  track.scrollLeft = next;
-
-  if (Math.abs(galleryVelocity) > 0.35 && next > 0 && next < max) {
-    galleryCoastRaf = requestAnimationFrame(coastGallery);
-    return;
-  }
-
-  galleryCoastRaf = 0;
-  galleryVelocity = 0;
-};
-
-track.addEventListener("pointerdown", (event) => {
-  if (event.button !== 0) {
-    return;
-  }
-
-  stopGalleryCoast();
-  galleryPointer = event.pointerId;
-  galleryStartX = event.clientX;
-  galleryStartY = event.clientY;
-  galleryLastX = event.clientX;
-  galleryLastTime = event.timeStamp;
-  galleryScroll = track.scrollLeft;
-  galleryAxis = event.pointerType === "mouse" ? "x" : null;
-  galleryMoved = false;
-  galleryVelocity = 0;
-  track.setPointerCapture(event.pointerId);
-});
-
-track.addEventListener("pointermove", (event) => {
-  if (galleryPointer !== event.pointerId) {
-    return;
-  }
-
-  const deltaX = event.clientX - galleryStartX;
-  const deltaY = event.clientY - galleryStartY;
-
-  if (!galleryAxis) {
-    if (Math.abs(deltaX) < 8 && Math.abs(deltaY) < 8) {
+  track.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0) {
       return;
     }
-    galleryAxis = Math.abs(deltaX) > Math.abs(deltaY) ? "x" : "y";
-    if (galleryAxis === "y") {
-      track.releasePointerCapture(event.pointerId);
-      galleryPointer = null;
+
+    stopGalleryCoast();
+    galleryPointer = event.pointerId;
+    galleryStartX = event.clientX;
+    galleryStartY = event.clientY;
+    galleryLastX = event.clientX;
+    galleryLastTime = event.timeStamp;
+    galleryScroll = track.scrollLeft;
+    galleryAxis = event.pointerType === "mouse" ? "x" : null;
+    galleryMoved = false;
+    galleryVelocity = 0;
+
+    if (typeof track.setPointerCapture === "function") {
+      track.setPointerCapture(event.pointerId);
+    }
+  });
+
+  track.addEventListener("pointermove", (event) => {
+    if (galleryPointer !== event.pointerId) {
       return;
     }
-  }
 
-  if (galleryAxis !== "x") {
-    return;
-  }
+    const deltaX = event.clientX - galleryStartX;
+    const deltaY = event.clientY - galleryStartY;
 
-  const now = event.timeStamp;
-  const dt = Math.max(1, now - galleryLastTime);
-  galleryVelocity = ((event.clientX - galleryLastX) / dt) * 16;
-  galleryLastX = event.clientX;
-  galleryLastTime = now;
-  galleryMoved = true;
-  track.classList.add("is-dragging");
-  galleryNextLeft = galleryScroll - deltaX;
-  if (!galleryRaf) {
-    galleryRaf = requestAnimationFrame(applyGalleryScroll);
-  }
-});
+    if (!galleryAxis) {
+      if (Math.abs(deltaX) < 6 && Math.abs(deltaY) < 6) {
+        return;
+      }
 
-const stopGalleryDrag = (event) => {
-  if (galleryPointer !== event.pointerId) {
-    return;
-  }
+      if (event.pointerType === "touch") {
+        galleryAxis = Math.abs(deltaX) >= Math.abs(deltaY) * 0.6 ? "x" : "y";
+      } else {
+        galleryAxis = Math.abs(deltaX) > Math.abs(deltaY) ? "x" : "y";
+      }
 
-  galleryPointer = null;
-  galleryAxis = null;
-  track.classList.remove("is-dragging");
+      if (galleryAxis === "y") {
+        if (typeof track.releasePointerCapture === "function") {
+          track.releasePointerCapture(event.pointerId);
+        }
+        galleryPointer = null;
+        return;
+      }
+    }
 
-  if (galleryMoved) {
-    coastGallery();
-  }
+    if (galleryAxis !== "x") {
+      return;
+    }
+
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+
+    const now = event.timeStamp;
+    const dt = Math.max(1, now - galleryLastTime);
+    galleryVelocity = ((event.clientX - galleryLastX) / dt) * 16;
+    galleryLastX = event.clientX;
+    galleryLastTime = now;
+    galleryMoved = true;
+    track.classList.add("is-dragging");
+    galleryNextLeft = galleryScroll - deltaX;
+    if (!galleryRaf) {
+      galleryRaf = requestAnimationFrame(applyGalleryScroll);
+    }
+  });
+
+  const stopGalleryDrag = (event) => {
+    if (galleryPointer !== event.pointerId) {
+      return;
+    }
+
+    galleryPointer = null;
+    galleryAxis = null;
+    track.classList.remove("is-dragging");
+
+    if (galleryMoved) {
+      coastGallery();
+    }
+  };
+
+  track.addEventListener("pointerup", stopGalleryDrag);
+  track.addEventListener("pointercancel", stopGalleryDrag);
 };
 
-track.addEventListener("pointerup", stopGalleryDrag);
-track.addEventListener("pointercancel", stopGalleryDrag);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}

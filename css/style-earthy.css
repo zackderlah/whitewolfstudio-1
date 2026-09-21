@@ -219,9 +219,11 @@ p {
   margin: auto;
   display: flex;
   gap: 1.6rem;
+  pointer-events: none;
 }
 
 .header-nav a {
+  pointer-events: auto;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -254,6 +256,9 @@ p {
   color: inherit;
   display: none;
   justify-self: start;
+  position: relative;
+  z-index: 2;
+  touch-action: manipulation;
 }
 
 .burger,
@@ -734,8 +739,9 @@ p {
   scroll-behavior: auto;
   scrollbar-width: none;
   cursor: grab;
-  touch-action: pan-y;
+  touch-action: pan-x pan-y;
   overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .gallery-track.is-dragging {
@@ -956,6 +962,11 @@ p {
 
   .header-nav {
     display: none;
+  }
+
+  .header-actions {
+    position: relative;
+    z-index: 2;
   }
 
   .header-book {
