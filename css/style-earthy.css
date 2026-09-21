@@ -398,6 +398,15 @@ p {
   padding: clamp(2rem, 6vw, 4.5rem) var(--gutter) 0;
 }
 
+.hero-location {
+  margin-bottom: 0.85rem;
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
 .hero-copy .lede {
   max-width: 42ch;
   margin: 1.4rem 0 0.5rem 0;
@@ -466,6 +475,7 @@ p {
   }
 }
 
+.hero-copy > .hero-location,
 .hero-copy > h1,
 .hero-copy > .lede,
 .hero-copy > .hero-end,
@@ -473,6 +483,10 @@ p {
 .hero-photo {
   opacity: 0;
   animation: hero-fade-in 2s var(--ease) forwards;
+}
+
+.hero-copy > .hero-location {
+  animation-delay: 0.05s;
 }
 
 .hero-copy > h1 {
@@ -1337,6 +1351,7 @@ p {
     filter: none;
   }
 
+  .hero-copy > .hero-location,
   .hero-copy > h1,
   .hero-copy > .lede,
   .hero-copy > .hero-end,

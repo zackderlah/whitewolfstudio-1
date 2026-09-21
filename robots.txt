@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /client-showcase/
+Disallow: /client-showcase-dark/
+Disallow: /light.html
+
+Sitemap: https://whitewolfstudio.au/sitemap.xml

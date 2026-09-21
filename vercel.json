@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    { "source": "/light.html", "destination": "/", "permanent": true },
+    { "source": "/earthy.html", "destination": "/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/client-showcase/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    },
+    {
+      "source": "/client-showcase-dark/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ]
+}
