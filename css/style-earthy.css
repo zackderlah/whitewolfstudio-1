@@ -49,6 +49,23 @@ a {
   color: inherit;
 }
 
+button,
+a,
+summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+a:focus {
+  outline: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -136,7 +153,12 @@ p {
   border: 0;
   border-radius: 0;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition:
+    background 0.25s var(--ease),
+    color 0.25s var(--ease),
+    transform 0.16s var(--ease),
+    filter 0.16s var(--ease),
+    opacity 0.16s var(--ease);
 }
 
 .btn-light {
@@ -174,6 +196,7 @@ p {
   text-decoration: none;
   border-bottom: 1px solid var(--ink);
   padding-bottom: 0.15rem;
+  transition: opacity 0.16s var(--ease), border-color 0.16s var(--ease);
 }
 
 .site-header {
@@ -259,16 +282,7 @@ p {
   position: relative;
   z-index: 2;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.icon-btn:focus {
-  outline: none;
-}
-
-.icon-btn:focus-visible {
-  outline: 2px solid var(--ink);
-  outline-offset: 3px;
+  transition: opacity 0.16s var(--ease), transform 0.16s var(--ease);
 }
 
 .burger,
@@ -960,6 +974,47 @@ p {
   color: var(--muted);
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .btn:active {
+    transform: scale(0.98);
+    filter: brightness(0.94);
+  }
+
+  .btn-light:active {
+    background: #3d4a36;
+  }
+
+  .btn-dark:active {
+    background: #e8e0d0;
+  }
+
+  .btn-ghost:active {
+    background: rgba(74, 88, 64, 0.12);
+    color: var(--ink);
+  }
+
+  .text-link:active {
+    opacity: 0.55;
+    border-bottom-color: rgba(60, 50, 38, 0.45);
+  }
+
+  .icon-btn:active {
+    opacity: 0.55;
+    transform: scale(0.94);
+  }
+
+  .header-nav a:active,
+  .menu-nav a:active,
+  .footer-grid nav a:active,
+  .footer-grid a:active,
+  .socials a:active,
+  .hero-base .socials a:active,
+  .brand:active,
+  .accordion-trigger:active {
+    opacity: 0.55;
+  }
+}
+
 @media (max-width: 980px) {
   :root {
     --header: 4.15rem;
@@ -1270,8 +1325,16 @@ p {
     scroll-behavior: auto;
   }
 
-  .btn {
+  .btn,
+  .icon-btn,
+  .text-link {
     transition: none;
+  }
+
+  .btn:active,
+  .icon-btn:active {
+    transform: none;
+    filter: none;
   }
 
   .hero-copy > h1,
