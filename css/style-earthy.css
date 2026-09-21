@@ -443,27 +443,27 @@ p {
 .hero-copy > .hero-base,
 .hero-photo {
   opacity: 0;
-  animation: hero-fade-in 0.85s var(--ease) forwards;
+  animation: hero-fade-in 2s var(--ease) forwards;
 }
 
 .hero-copy > h1 {
-  animation-delay: 0.05s;
+  animation-delay: 0.1s;
 }
 
 .hero-copy > .lede {
-  animation-delay: 0.18s;
+  animation-delay: 0.35s;
 }
 
 .hero-copy > .hero-end {
-  animation-delay: 0.3s;
+  animation-delay: 0.55s;
 }
 
 .hero-copy > .hero-base {
-  animation-delay: 0.42s;
+  animation-delay: 0.75s;
 }
 
 .hero-photo {
-  animation-delay: 0.12s;
+  animation-delay: 0.22s;
 }
 
 .hero-photo img,
